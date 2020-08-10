@@ -77,15 +77,21 @@ if (basket) {
 
     let newA = document.createElement("a");
     newA.textContent= "Poursuivre mes achats";
-    newA.classList.add("btn", "btn-secondary", "mx-2", "my-1");
+    newA.classList.add("btn", "btn-secondary", "mx-2", "my-2");
     newA.setAttribute("href", "index.html");
     newDiv4.appendChild(newA);
 
     let newButton2 = document.createElement("button");
     newButton2.textContent= "Valider mon panier";
-    newButton2.classList.add("btn", "btn-primary", "mx-2", "my-1", "appearForm");
+    newButton2.classList.add("btn", "btn-primary", "mx-2", "my-2", "appearForm");
     newButton2.setAttribute("type", "button");
     newDiv4.appendChild(newButton2);
+
+    let newForm = document.createElement("form");
+    newForm.classList.add("p-2", "formulaire");
+    newForm.innerHTML = '<div class="form-group mt-3"><h3 class="h4">Veuillez remplir ce formulaire</h3></div><div class="form-group mt-3"><label for="foreName">Prénom :</label><input type="text" class="form-control" id="foreName" required></div><div class="form-group mt-3"><label for="lastName">Nom :</label><input type="text" class="form-control" id="lastName" required></div><div class="form-group mt-3"><label for="adress">Adresse :</label><input type="text" class="form-control" id="adress" required></div><div class="form-group mt-3"><label for="city">Ville :</label><input type="text" class="form-control" id="city" required></div><div class="form-group mt-3"><label for="email">Adresse e-mail :</label><input type="email" class="form-control" id="email" required></div><button type="submit" class="btn btn-primary mx-auto">Finaliser ma commande</button>';
+    newForm.style = "display:none";
+    divToFill.appendChild(newForm);
 
 }
 else {
@@ -115,3 +121,7 @@ boutonsSupp[i].addEventListener('click', function() {
     }
     })
 }
+
+document.querySelector(".appearForm").addEventListener('click', function() {
+    document.querySelector(".formulaire").setAttribute("style", "display:block");
+    })
