@@ -72,12 +72,18 @@ function displayDetails(Camera) {
     newDiv3.appendChild(newDiv5);
 
     let newA = document.createElement("a");
-    newA.classList.add("btn", "btn-primary");
+    newA.classList.add("btn", "btn-primary", "mx-2", "my-2");
     var myUrl = 'basket.html';
     newA.setAttribute("href", myUrl);
     newA.setAttribute("id", "addBasket")
     newA.textContent = "Ajouter au panier";
     newDiv3.appendChild(newA);
+
+    let newA2 = document.createElement("a");
+    newA2.textContent= "Poursuivre mes achats";
+    newA2.classList.add("btn", "btn-secondary", "mx-2", "my-2");
+    newA2.setAttribute("href", "index.html");
+    newDiv3.appendChild(newA2);
 
     var addBasketElmt = document.getElementById('addBasket');
 
