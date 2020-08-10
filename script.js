@@ -14,7 +14,7 @@ function createCard(camera) {
     document.getElementById("Cameras").appendChild(newDiv2);
 
     let newDiv3 = document.createElement("div");
-    newDiv3.classList.add("card", "mb-4", "mb-lg-2", "border-primary", "shadow");
+    newDiv3.classList.add("card", "mb-4", "border-primary", "shadow");
     newDiv2.appendChild(newDiv3);
     
     let newImg = document.createElement("img");
@@ -27,10 +27,10 @@ function createCard(camera) {
     newDiv4.classList.add("card-body");
     newDiv3.appendChild(newDiv4);
 
-    let newH2 = document.createElement("h2");
-    newH2.classList.add("card-title");
-    newH2.textContent = camera.name;
-    newDiv4.appendChild(newH2);
+    let newH3 = document.createElement("h3");
+    newH3.classList.add("card-title");
+    newH3.textContent = camera.name;
+    newDiv4.appendChild(newH3);
 
     let newA = document.createElement("a");
     newA.classList.add("btn", "btn-primary", "stretched-link");
