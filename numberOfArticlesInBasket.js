@@ -1,5 +1,5 @@
 
-var articlesInBasket = function(basket) {
+var numberOfArticlesInBasket = function(basket) {
     let totalNumberOfArticles = 0;
         for  (let i = 0; i < basket.length; i++) {
             totalNumberOfArticles += basket[i].quantity;
@@ -16,5 +16,5 @@ var articlesInBasket = function(basket) {
 var basket = JSON.parse(localStorage.getItem('basket'));
 
 if (basket) {
-    articlesInBasket(basket);
+    numberOfArticlesInBasket(basket);
 }

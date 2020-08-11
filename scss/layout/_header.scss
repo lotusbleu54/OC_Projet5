@@ -1,3 +1,4 @@
+//Permet de fixer la couleur du header ainsi que la police "Orinoco"
 header {
     background-color: $primary-color;
     a {
@@ -5,4 +6,5 @@ header {
     }
 }
 
+//Pour écraser la propriété bootstrap par défaut
 .jumbotron{background-color: $primary-color !important;}

@@ -1,12 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Détail fiches produits Orivintage">
 
-  <link rel="stylesheet" href="public/css/style.css" />
+  <title>Orivintage - nos produits</title>
+
+  <!--Feuille de stype css-->
+  <link rel="stylesheet" href="public/css/style.css">
 
   <!--Favicon-->
 	<link rel="shortcut icon" type="image/png" href="images/LogoOrinoco.png">
@@ -14,7 +17,6 @@
   <!-- Lien pour l'utilisation des fontawesome -->
   <script src="https://kit.fontawesome.com/10b41e4388.js" crossorigin="anonymous"></script>
 
-  <title>Orivintage - nos produits</title>
 </head>
 
 <body>
@@ -25,7 +27,7 @@
           <a class="navbar-brand" href="index.html">
             <img src="images/LogoOrinoco.png"  alt="Info Logo" /> Orivintage by Orinoco
           </a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div id="navbarContent" class="collapse navbar-collapse">
@@ -41,10 +43,12 @@
         </nav>
       </div>
     </div>
-</header>
-  <div class="container" id="productContainer">
-  </div>
-  <div class="bg-light mt-5">
+  </header>
+
+  <!--Le contenu principal est construit entièrement à partir du script productDetails-->
+  <div class="container" id="productContainer"></div>
+
+  <footer class="bg-light mt-5">
     <div class="container">
       <div class="row pt-4 pb-3">
         <div class="col">
@@ -58,13 +62,18 @@
         </div>
       </div>
     </div>
-  </div>
+  </footer>
 
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script type="text/javascript" src="compteArticles.js"></script>
-  <script type="text/javascript" src="product.js"></script>
+  <!--Appel du script qui met à jour le numéro indicant le nombre d'articles dans le panier-->
+  <script src="numberOfArticlesInBasket.js"></script>
+
+  <!--Appel du script qui génére le bloc détaillé du produit sélectionné sur la page d'accueil-->
+  <script src="productDetails.js"></script>
+
+  <!-- Autres scripts : jQuery, Popper et Bootstrap-->
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
 </body>
 </html>
