@@ -13,8 +13,7 @@ var articlesInBasket = function(basket) {
         else {document.getElementById("basketNumber").textContent = "(99+)";}
     }
 
-var inBasket = localStorage.getItem('basket');
-var basket = JSON.parse(inBasket);
+var basket = JSON.parse(localStorage.getItem('basket'));
 
 if (basket) {
     articlesInBasket(basket);
