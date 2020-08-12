@@ -1,5 +1,7 @@
 
-var numberOfArticlesInBasket = function(basket) {
+let basket = JSON.parse(localStorage.getItem('basket'));
+
+numberOfArticlesInBasket = function(basket) {
     let totalNumberOfArticles = 0;
         for  (let i = 0; i < basket.length; i++) {
             totalNumberOfArticles += basket[i].quantity;
@@ -12,8 +14,6 @@ var numberOfArticlesInBasket = function(basket) {
         }
         else {document.getElementById("basketNumber").textContent = "(99+)";}
     }
-
-var basket = JSON.parse(localStorage.getItem('basket'));
 
 if (basket) {
     numberOfArticlesInBasket(basket);

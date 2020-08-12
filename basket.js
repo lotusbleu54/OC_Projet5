@@ -159,6 +159,10 @@ if (basket) {
     newForm.innerHTML = '<div class="form-group mt-3"><h3 class="h4">Veuillez remplir ce formulaire</h3></div><div class="form-group mt-3"><label for="firstName">Prénom :</label><input type="text" maxlength="30" class="form-control" id="firstName" required></div><div class="form-group mt-3"><label for="lastName">Nom :</label><input type="text" class="form-control" maxlength="30" id="lastName" required></div><div class="form-group mt-3"><label for="address">Adresse :</label><input type="text" class="form-control" id="address" required></div><div class="form-group mt-3"><label for="city">Ville :</label><input type="text" class="form-control" id="city" required></div><div class="form-group mt-3"><label for="email">Adresse e-mail :</label><input type="email" class="form-control" id="email" required></div><button type="submit" class="btn btn-primary mx-auto" id="finalValidation">Finaliser ma commande</button>';
     newForm.style = "display:none"; //Le formulaire reste caché tant qu'on ne clique pas sur "Valider mon panier"
     divToFill.appendChild(newForm);
+    document.getElementById("firstName").setAttribute("pattern","^[A-Za-zÀ-ÿ '-]+$"); //Regex qui prend les accents ou les lettres comme ç mais pas les caractères spéciaux ni les chiffres
+    document.getElementById("firstName").setAttribute("title","Pas de caractères spéciaux ni de chiffres");
+    document.getElementById("lastName").setAttribute("pattern","^[A-Za-zÀ-ÿ '-]+$");
+    document.getElementById("lastName").setAttribute("title","Pas de caractères spéciaux ni de chiffres");
 
     //Fonction permettant de vider le panier lorsque l'utilisateur clique sur "Vider mon panier"
     document.querySelector(".deleteAll").addEventListener('click', emptyBasket);
