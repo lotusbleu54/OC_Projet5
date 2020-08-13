@@ -72,13 +72,6 @@ if (basket) {
     newH1.textContent="Votre panier";
     newDiv0.appendChild(newH1);
 
-    //Bouton "vider mon panier"
-    let newButton0 = document.createElement("button");
-    newButton0.textContent= "Vider mon panier";
-    newButton0.classList.add("btn", "btn-light", "py-0", "deleteAll");
-    newButton0.setAttribute("type", "button");
-    newDiv0.appendChild(newButton0);
-
     //Trait de séparation
     let breakLine = document.createElement("hr");
     divToFill.appendChild(breakLine);
@@ -163,21 +156,21 @@ if (basket) {
     document.getElementById("firstName").setAttribute("title","Pas de caractères spéciaux ni de chiffres");
     document.getElementById("lastName").setAttribute("pattern","^[A-Za-zÀ-ÿ '-]+$");
     document.getElementById("lastName").setAttribute("title","Pas de caractères spéciaux ni de chiffres");
-
-    //Fonction permettant de vider le panier lorsque l'utilisateur clique sur "Vider mon panier"
-    document.querySelector(".deleteAll").addEventListener('click', emptyBasket);
     
     //Fonction permettant d'écouter le clic sur "Supprimer" pour n'importe quel élément du panier
     let boutonsSupp = document.getElementsByClassName("deleteCamera");
     for (let i = 0; i < boutonsSupp.length; i++) {
         boutonsSupp[i].addEventListener('click', function() {
-            if (boutonsSupp.length==1) {
-                emptyBasket(); //S'il n'y a qu'un article dans le panier, on applique la même fonction que si on vide tout le panier
-            }
-            else {
-                basket.splice(i,1); //On supprime l'élément de la liste grâce à la fonction splice
-                localStorage.setItem('basket', JSON.stringify(basket)); //On stocke le nouveau panier
-                document.location.reload(true); //On recharge la page pour prise en compte du changement
+            let conf = confirm("Confirmez-vous la suppression de cet article ?");
+            if (conf) {
+                if (boutonsSupp.length==1) {
+                    emptyBasket(); //S'il n'y a qu'un article dans le panier, on applique la même fonction que si on vide tout le panier
+                }
+                else {
+                    basket.splice(i,1); //On supprime l'élément de la liste grâce à la fonction splice
+                    localStorage.setItem('basket', JSON.stringify(basket)); //On stocke le nouveau panier
+                    document.location.reload(true); //On recharge la page pour prise en compte du changement
+                }
             }
         })
     }

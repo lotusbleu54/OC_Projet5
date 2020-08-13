@@ -13,27 +13,31 @@ request.send();
 //Fonction qui crée un seul bloc appareil photo en utilisant la structure bootstrap des "cards"
 function makeBloc(camera) {
     let newDiv = document.createElement("div");
-    newDiv.classList.add("col-12", "col-lg-4", "d-flex");
+    newDiv.classList.add("col-12", "col-lg-4");
     document.getElementById("Cameras").appendChild(newDiv);
 
     let newDiv2 = document.createElement("div");
     newDiv2.classList.add("card", "mb-4", "border-primary", "shadow");
     newDiv.appendChild(newDiv2);
     
+    let newDiv3 = document.createElement("div");
+    newDiv3.classList.add("embed-responsive", "embed-responsive-16by9");
+    newDiv2.appendChild(newDiv3);
+
     let newImg = document.createElement("img");
-    newImg.classList.add("card-img-top");
+    newImg.classList.add("card-img-top", "embed-responsive-item");
     newImg.src = camera.imageUrl;
     newImg.setAttribute("alt", camera.description);
-    newDiv2.appendChild(newImg);
+    newDiv3.appendChild(newImg);
     
-    let newDiv3 = document.createElement("div");
-    newDiv3.classList.add("card-body");
-    newDiv2.appendChild(newDiv3);
+    let newDiv4 = document.createElement("div");
+    newDiv4.classList.add("card-body");
+    newDiv2.appendChild(newDiv4);
 
     let newH2 = document.createElement("h2");
     newH2.classList.add("card-title", "h3");
     newH2.textContent = camera.name;
-    newDiv3.appendChild(newH2);
+    newDiv4.appendChild(newH2);
 
     let newA = document.createElement("a");
     //Le clic sur ce lien ouvrira une page dont l'URL dépendra de l'id de l'appareil photo
@@ -41,7 +45,7 @@ function makeBloc(camera) {
     newA.setAttribute("href", myUrl);
     newA.classList.add("btn", "btn-primary", "stretched-link");
     newA.textContent = "Plus de détails";
-    newDiv3.appendChild(newA);
+    newDiv4.appendChild(newA);
 }
 
 //Fonction qui crée l'ensemble des blocs appareil photo
@@ -50,7 +54,7 @@ function makeBlocs(Cameras) {
     //Création du bloc global comprenant tous les blocs
     let newDiv = document.createElement("div");
     newDiv.id = "Cameras";
-    newDiv.classList.add("row");
+    newDiv.classList.add("row", "d-flex", "justify-content-center");
     let parent = document.getElementById("cardsContainer");
     parent.appendChild(newDiv);
 
