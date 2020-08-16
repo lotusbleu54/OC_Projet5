@@ -63,63 +63,75 @@ emptyBasket = function() {
 if (basket) {
 
     //Création des blocs
-    let newDiv0 = document.createElement("div");
-    newDiv0.classList.add("d-flex", "flex-wrap", "justify-content-between", "align-items-center", "p-2");
-    divToFill.appendChild(newDiv0);
+    let newTable = document.createElement("Table");
+    newTable.classList.add("table", "table-striped");
+    divToFill.appendChild(newTable);
     
-    let newH1 = document.createElement("h1");
-    newH1.classList.add("h5","mt-2");
-    newH1.textContent="Votre panier";
-    newDiv0.appendChild(newH1);
-
-    //Trait de séparation
-    let breakLine = document.createElement("hr");
-    divToFill.appendChild(breakLine);
+    let newThead = document.createElement("thead");
+    newTable.appendChild(newThead);
+    let newTr = document.createElement("tr");
+    newThead.appendChild(newTr);
+    let newTh = document.createElement("th");
+    newTh.setAttribute("colspan",5);
+    newTh.textContent="Votre panier";
+    newTr.appendChild(newTh);
     
     //Création d'une ligne par type d'articles commandés
+    let newTbody = document.createElement("tbody");
+    newTable.appendChild(newTbody);
     for (let i = 0; i < basket.length; i++) {
-        let newDiv = document.createElement("div");
-        newDiv.classList.add("d-flex", "flex-wrap", "justify-content-between", "align-items-center", "p-2");
-        divToFill.appendChild(newDiv);
-    
+        let newTr = document.createElement("tr");
+        newTbody.appendChild(newTr);
+
         //Photo de l'appareil redimensionnée
+        let newTd = document.createElement("td");
+        newTr.appendChild(newTd);
         let newImg = document.createElement("img");
         newImg.src = basket[i].imageUrl;
         newImg.setAttribute("alt", basket[i].description);
-        newImg.setAttribute("width", "100px");
-        newImg.setAttribute("height", "75px");
-        newDiv.appendChild(newImg);
+        newImg.setAttribute("width", "130px");
+        newImg.setAttribute("height", "90px");
+        newTd.appendChild(newImg);
     
         //Nom de l'appareil
-        let newP = document.createElement("p");
-        newP.textContent = basket[i].name;
-        newP.classList.add("mb-0", "my-1");
-        newDiv.appendChild(newP);
+        let newTd2 = document.createElement("td");
+        newTd2.textContent = basket[i].name;
+        newTd2.classList.add("align-middle");
+        newTr.appendChild(newTd2);
         
         //Quantité sélectionnée
-        let newP2 = document.createElement("p");
-        newP2.textContent = "Quantité: "+basket[i].quantity;
-        newP2.classList.add("mb-0", "my-1");
-        newDiv.appendChild(newP2);
+        let newTd3 = document.createElement("td");
+        newTd3.textContent = "Quantité: "+basket[i].quantity;
+        newTd3.classList.add("align-middle");
+        newTr.appendChild(newTd3);
         
         //Prix unitaire
-        let newP3 = document.createElement("p");
-        newP3.textContent = "Prix unitaire: "+basket[i].price+" €";
-        newP3.classList.add("mb-0", "my-1");
-        newDiv.appendChild(newP3);
+        let newTd4 = document.createElement("td");
+        newTd4.textContent = "Prix unitaire: "+basket[i].price+" €";
+        newTd4.classList.add("align-middle");
+        newTr.appendChild(newTd4);
         
         //Bouton supprimer
+        let newTd5 = document.createElement("td");
+        newTd5.classList.add("align-middle");
+        newTr.appendChild(newTd5);
         let newButton = document.createElement("button");
         newButton.textContent= "Supprimer";
         newButton.classList.add("btn", "btn-light", "py-0", "deleteCamera");
         newButton.setAttribute("type", "button");
-        newDiv.appendChild(newButton);
+        newTd5.appendChild(newButton);
     }
 
     //Ajout récap avec nombre d'articles prix total
-    let newDiv3 = document.createElement("div");
-    newDiv3.innerHTML = '<hr><p>Total (<span id="articleNumber"></span> articles): <span id="totalPrice"></span> €</p>'; 
-    divToFill.appendChild(newDiv3);
+    let newTfoot = document.createElement("tfoot");
+    newTable.appendChild(newTfoot);
+    let newTr3 = document.createElement("tr");
+    newTfoot.appendChild(newTr3);
+    let newTh2 = document.createElement("th");
+    newTh2.setAttribute("colspan",5);
+    newTh2.innerHTML='Total (<span id="articleNumber"></span> articles): <span id="totalPrice"></span> €';
+    newTr3.appendChild(newTh2);
+
     for  (let i = 0; i < basket.length; i++) { //Parcours du panier pour faire la multiplication des quantités et des prix unitaires
         totalNumberOfArticles += basket[i].quantity;
         totalPrice += basket[i].quantity*basket[i].price;
