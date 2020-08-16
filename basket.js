@@ -1,5 +1,6 @@
-/*Déclaration générale de variables*/
 let divToFill = document.getElementById("basketContainer");
+let totalPrice;
+let totalNumberOfArticles;
 
 /*Fonction pour passer la commande lorsque le formulaire est rempli et valide*/
 orderCamera = function (order) {
@@ -50,9 +51,10 @@ validationForm = function(event) {
     }
 }
 
+/*Fonction de mise à jour du récapitulatif commande en bas de page*/
 updateTotal = function() {
-    let totalNumberOfArticles = 0;
-    let totalPrice = 0;
+    totalNumberOfArticles = 0;
+    totalPrice = 0;
     for  (let i = 0; i < basket.length; i++) { //Parcours du panier pour faire la multiplication des quantités et des prix unitaires
         totalNumberOfArticles += basket[i].quantity;
         totalPrice += basket[i].quantity*basket[i].price;
@@ -120,18 +122,6 @@ if (basket) {
         let options=newSpan.getElementsByTagName("option");
         options[(basket[i].quantity)-1].setAttribute("selected",true);
         newTd3.appendChild(newSpan);
-
-        //Ajout d'une fonction de mise à jour du panier en cas de changement de quantité
-        let qtys = document.getElementsByClassName('qty-select');
-        for (let i = 0; i < qtys.length; i++) {
-            qtys[i].addEventListener('input', function() {
-                let qtyElmt = parseInt(qtys[i].value);
-                basket[i].quantity=qtyElmt; //Remplacement de la quantité en mémoire par la nouvelle quantité
-                localStorage.setItem('basket', JSON.stringify(basket)); //On stocke le nouveau panier
-                updateTotal(); //Mise à jour total bas de page
-                numberOfArticlesInBasket(JSON.parse(localStorage.getItem('basket'))); //Mise à jour chiffre indiquant le nombre d'articles dans le panier
-            })
-        }
         
         //Prix unitaire
         let newTd4 = document.createElement("td");
@@ -160,6 +150,7 @@ if (basket) {
     newTh2.innerHTML='Total (<span id="articleNumber"></span> articles): <span id="totalPrice"></span> €';
     newTr3.appendChild(newTh2);
     updateTotal();
+
 
     //Nouveau bloc pour contenir la validation de commande
     let newDiv4 = document.createElement("div");
@@ -191,6 +182,18 @@ if (basket) {
     document.getElementById("lastName").setAttribute("pattern","^[A-Za-zÀ-ÿ '-]+$");
     document.getElementById("lastName").setAttribute("title","Pas de caractères spéciaux ni de chiffres");
     
+    //Ajout d'une fonction de mise à jour du panier en cas de changement de quantité
+    let qtys = document.getElementsByClassName('qty-select');
+    for (let i = 0; i < qtys.length; i++) {
+        qtys[i].addEventListener('input', function() {
+            let qtyElmt = parseInt(qtys[i].value);
+            basket[i].quantity=qtyElmt; //Remplacement de la quantité en mémoire par la nouvelle quantité
+            localStorage.setItem('basket', JSON.stringify(basket)); //On stocke le nouveau panier
+            updateTotal(); //Mise à jour total bas de page
+            numberOfArticlesInBasket(JSON.parse(localStorage.getItem('basket'))); //Mise à jour chiffre indiquant le nombre d'articles dans le panier
+        })
+    }
+
     //Fonction permettant d'écouter le clic sur "Supprimer" pour n'importe quel élément du panier
     let boutonsSupp = document.getElementsByClassName("deleteCamera");
     for (let i = 0; i < boutonsSupp.length; i++) {
