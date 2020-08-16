@@ -1,6 +1,4 @@
 /*Déclaration générale de variables*/
-let totalNumberOfArticles = 0;
-let totalPrice = 0;
 let divToFill = document.getElementById("basketContainer");
 
 /*Fonction pour passer la commande lorsque le formulaire est rempli et valide*/
@@ -50,7 +48,18 @@ validationForm = function(event) {
     else { 
         alert("Formulaire invalide");
     }
-} 
+}
+
+updateTotal = function() {
+    let totalNumberOfArticles = 0;
+    let totalPrice = 0;
+    for  (let i = 0; i < basket.length; i++) { //Parcours du panier pour faire la multiplication des quantités et des prix unitaires
+        totalNumberOfArticles += basket[i].quantity;
+        totalPrice += basket[i].quantity*basket[i].price;
+    }
+    document.getElementById("articleNumber").innerHTML = totalNumberOfArticles;
+    document.getElementById("totalPrice").innerHTML = totalPrice;
+}
 
 /*Fonction de vidage du panier et de remplissage de la page lorsque le panier est vide*/
 emptyBasket = function() {
@@ -62,11 +71,12 @@ emptyBasket = function() {
 /*S'il y a au moins un produit dans le panier, on remplit la page avec la liste des produits commandés*/
 if (basket) {
 
-    //Création des blocs
+    //Création d'une table
     let newTable = document.createElement("Table");
     newTable.classList.add("table", "table-striped");
     divToFill.appendChild(newTable);
     
+    //En-tête de la table
     let newThead = document.createElement("thead");
     newTable.appendChild(newThead);
     let newTr = document.createElement("tr");
@@ -75,10 +85,12 @@ if (basket) {
     newTh.setAttribute("colspan",5);
     newTh.textContent="Votre panier";
     newTr.appendChild(newTh);
-    
-    //Création d'une ligne par type d'articles commandés
+
+    //Création du corps de la table
     let newTbody = document.createElement("tbody");
     newTable.appendChild(newTbody);
+
+    //Création d'une ligne par type d'articles commandés
     for (let i = 0; i < basket.length; i++) {
         let newTr = document.createElement("tr");
         newTbody.appendChild(newTr);
@@ -101,9 +113,25 @@ if (basket) {
         
         //Quantité sélectionnée
         let newTd3 = document.createElement("td");
-        newTd3.textContent = "Quantité: "+basket[i].quantity;
         newTd3.classList.add("align-middle");
         newTr.appendChild(newTd3);
+        let newSpan = document.createElement("span");
+        newSpan.innerHTML = '<label class="mb-0" for="qty-select">Quantité :  &nbsp;</label><select class="qty-select"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select>'; 
+        let options=newSpan.getElementsByTagName("option");
+        options[(basket[i].quantity)-1].setAttribute("selected",true);
+        newTd3.appendChild(newSpan);
+
+        //Ajout d'une fonction de mise à jour du panier en cas de changement de quantité
+        let qtys = document.getElementsByClassName('qty-select');
+        for (let i = 0; i < qtys.length; i++) {
+            qtys[i].addEventListener('input', function() {
+                let qtyElmt = parseInt(qtys[i].value);
+                basket[i].quantity=qtyElmt; //Remplacement de la quantité en mémoire par la nouvelle quantité
+                localStorage.setItem('basket', JSON.stringify(basket)); //On stocke le nouveau panier
+                updateTotal(); //Mise à jour total bas de page
+                numberOfArticlesInBasket(JSON.parse(localStorage.getItem('basket'))); //Mise à jour chiffre indiquant le nombre d'articles dans le panier
+            })
+        }
         
         //Prix unitaire
         let newTd4 = document.createElement("td");
@@ -122,7 +150,7 @@ if (basket) {
         newTd5.appendChild(newButton);
     }
 
-    //Ajout récap avec nombre d'articles prix total
+    //Ajout récap avec nombre d'articles prix total (en pied de tableau)
     let newTfoot = document.createElement("tfoot");
     newTable.appendChild(newTfoot);
     let newTr3 = document.createElement("tr");
@@ -131,13 +159,7 @@ if (basket) {
     newTh2.setAttribute("colspan",5);
     newTh2.innerHTML='Total (<span id="articleNumber"></span> articles): <span id="totalPrice"></span> €';
     newTr3.appendChild(newTh2);
-
-    for  (let i = 0; i < basket.length; i++) { //Parcours du panier pour faire la multiplication des quantités et des prix unitaires
-        totalNumberOfArticles += basket[i].quantity;
-        totalPrice += basket[i].quantity*basket[i].price;
-    }
-    document.getElementById("articleNumber").innerHTML = totalNumberOfArticles;
-    document.getElementById("totalPrice").innerHTML = totalPrice;
+    updateTotal();
 
     //Nouveau bloc pour contenir la validation de commande
     let newDiv4 = document.createElement("div");

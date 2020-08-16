@@ -124,8 +124,14 @@ function displayDetails(Camera) {
             for (let i = 0; i < basket.length; i++) {
                 if (basket[i].id === cameraToAdd.id) {
                     alreadyOrdered = true;
-                    basket[i].quantity += cameraToAdd.quantity;
-                    
+                    if ((cameraToAdd.quantity+basket[i].quantity)>10) {
+                        alert('La quantité maximale totale pour cet article est de 10');
+                    }
+                    else { //Si le produit est déjà dans le panier, il suffit de stocker en mémoire la nouvelle quantité
+                        basket[i].quantity += cameraToAdd.quantity;
+                        localStorage.setItem('basket', JSON.stringify(basket));
+                        alert('Ajouté au panier !');
+                    }
                 }
             }
 
@@ -136,11 +142,6 @@ function displayDetails(Camera) {
                 alert('Ajouté au panier !'); //prévient l'utilisateur du bon déroulement de l'action
             }
 
-            //Si le produit est déjà dans le panier, il suffit de stocker en mémoire la nouvelle quantité
-            else {
-                localStorage.setItem('basket', JSON.stringify(basket));
-                alert('Ajouté au panier !');
-            }
         }
 
         //Si panier inexistant, crée un panier sous forme de tableau (format attendu par l'API)
