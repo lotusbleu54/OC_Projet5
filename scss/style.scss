@@ -1,4 +1,9 @@
 @import "utils/variable_overrides";
 @import "layout/header";
 @import "base/fonts";
-@import "../node_modules/bootstrap/scss/bootstrap.scss"
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
+
+.asterisque{
+    color:red;
+    font-weight: bold;
+}
