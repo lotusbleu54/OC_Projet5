@@ -74,9 +74,12 @@ emptyBasket = function() {
 if (basket) {
 
     //Création d'une table
+    let newDiv = document.createElement("div");
+    newDiv.classList.add("table-responsive-md");
+    divToFill.appendChild(newDiv);
     let newTable = document.createElement("Table");
     newTable.classList.add("table", "table-striped");
-    divToFill.appendChild(newTable);
+    newDiv.appendChild(newTable);
     
     //En-tête de la table
     let newThead = document.createElement("thead");
@@ -153,23 +156,23 @@ if (basket) {
 
 
     //Nouveau bloc pour contenir la validation de commande
-    let newDiv4 = document.createElement("div");
-    newDiv4.classList.add("d-flex", "flex-wrap", "justify-content-center", "align-items-center", "p-2");
-    divToFill.appendChild(newDiv4);
+    let newDiv2 = document.createElement("div");
+    newDiv2.classList.add("d-flex", "flex-wrap", "justify-content-center", "align-items-center", "p-2");
+    divToFill.appendChild(newDiv2);
 
     //Lien vers la page d'accueil (bouton poursuivre achats)
     let newA = document.createElement("a");
     newA.textContent= "Poursuivre mes achats";
     newA.classList.add("btn", "btn-secondary", "mx-2", "my-2");
     newA.setAttribute("href", "index.html");
-    newDiv4.appendChild(newA);
+    newDiv2.appendChild(newA);
 
     //Bouton permettant de faire apparaître le formulaire
     let newButton2 = document.createElement("button");
     newButton2.textContent= "Valider mon panier";
     newButton2.classList.add("btn", "btn-primary", "mx-2", "my-2", "appearForm");
     newButton2.setAttribute("type", "button");
-    newDiv4.appendChild(newButton2);
+    newDiv2.appendChild(newButton2);
 
     //Création du formulaire
     let newForm = document.createElement("form");
