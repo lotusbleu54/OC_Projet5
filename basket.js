@@ -60,7 +60,7 @@ updateTotal = function() {
         totalPrice += basket[i].quantity*basket[i].price;
     }
     document.getElementById("articleNumber").innerHTML = totalNumberOfArticles;
-    document.getElementById("totalPrice").innerHTML = totalPrice;
+    document.getElementById("totalPrice").innerHTML = parseInt(totalPrice/100);
 }
 
 /*Fonction de vidage du panier et de remplissage de la page lorsque le panier est vide*/
@@ -128,7 +128,7 @@ if (basket) {
         
         //Prix unitaire
         let newTd4 = document.createElement("td");
-        newTd4.textContent = "Prix unitaire: "+basket[i].price+" €";
+        newTd4.textContent = "Prix unitaire: "+parseInt(basket[i].price/100)+" €";
         newTd4.classList.add("align-middle");
         newTr.appendChild(newTd4);
         

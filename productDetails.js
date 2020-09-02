@@ -60,7 +60,7 @@ function displayDetails(Camera) {
     //Prix
     let newP2 = document.createElement("p");
     newP2.classList.add("card-text");
-    newP2.textContent = "Prix : " + Camera.price + " €";
+    newP2.textContent = "Prix : " + parseInt(Camera.price/100) + " €";
     newDiv3.appendChild(newP2);
 
     //Menu déroulant avec choix lentilles

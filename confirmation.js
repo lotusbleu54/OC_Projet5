@@ -6,7 +6,7 @@ function confirmation() {
     //Afin ces infos à l'endroit approprié
     document.getElementById("prenom").textContent = contact.firstName;
     document.getElementById("nom").textContent = contact.lastName;
-    document.getElementById("amount").textContent = amount;
+    document.getElementById("amount").textContent = parseInt(amount/100);
     document.getElementById("orderId").textContent = orderId;
 }
 
